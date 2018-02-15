@@ -13,18 +13,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
-import javafx.stage.Stage;
+import ua.kas.main.Cook;
 import ua.kas.main.Database;
 
-public class ControllerAll implements Initializable {
+public class ControllerAll implements Cook {
 
 	@FXML
 	ListView<String> lv_mainDishes;
@@ -73,8 +69,8 @@ public class ControllerAll implements Initializable {
 
 	}
 
-	public void select() throws SQLException, IOException {
-
+	@Override
+	public void select() throws SQLException {
 		ObservableList<String> all = null;
 
 		for (ListView<String> lv : linkListAll) {
@@ -101,12 +97,9 @@ public class ControllerAll implements Initializable {
 		}
 	}
 
+	@Override
 	public void back(ActionEvent e) throws IOException {
-		Scene scene = new Scene(FXMLLoader.load(getClass().getResource("../main.fxml")));
-		scene.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
-		Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
+		Cook.super.back(e);
 	}
 
 }
